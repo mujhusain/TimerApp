@@ -1,32 +1,8 @@
 import React, { createContext, useReducer, useContext, useEffect, useRef, useState } from "react";
 import { Alert } from "react-native";
 import { formatCompletionTime } from "../utills/utills";
-
-export interface Timer {
-  id: string;
-  name: string;
-  duration: number;
-  remainingTime: number;
-  status: "Running" | "Paused" | "Completed";
-  category: string;
-  hasShownHalfwayAlert?: boolean;
-}
-
-export interface TimerState {
-  timers: Timer[];
-  history: { id: string; name: string; completionTime: string }[];
-  completedTimerName?: string | null;
-}
-
-type Action =
-  | { type: "ADD_TIMER"; payload: Timer }
-  | { type: "UPDATE_TIMER"; payload: Timer }
-  | { type: "ADD_TO_HISTORY"; payload: { id: string; name: string; completionTime: string } }
-  | { type: "DELETE_TIMER"; payload: string }
-  | { type: "RESET_TIMER"; payload: string }
-  | { type: "START_TIMER"; payload: string }
-  | { type: "PAUSE_TIMER"; payload: string }
-  | { type: "HIDE_MODAL"; payload: string };
+import { getData, setData } from "../utills/storage";
+import { Action, TimerState } from "./types";
 
 const initialState: TimerState = {
   timers: [],
@@ -84,6 +60,8 @@ const timerReducer = (state: TimerState, action: Action): TimerState => {
         ...state,
         completedTimerName: null,
       };
+    case "SET_STATE":
+      return { ...action.payload };
     default:
       return state;
   }
@@ -96,6 +74,42 @@ interface TimerProviderProps {
 export const TimerProvider: React.FC<TimerProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(timerReducer, initialState);
   const intervals = useRef<{ [id: string]: NodeJS.Timeout }>({});
+
+    useEffect(() => {
+      const loadData = () => {
+        try {
+          setData("timers", state.timers);
+          setData("history", state.history);
+        } catch (error) {
+          console.error("Error saving data to AsyncStorage:", error);
+        }
+      }
+      setTimeout(()=>{
+        loadData();
+      },100)
+    }, [state.timers, state.history]);
+  
+    // Load state
+    useEffect(() => {
+      const loadState = async () => {
+        try {
+          const timers = await getData("timers");
+          const history = await getData("history");
+
+          dispatch({
+            type: "SET_STATE",
+            payload: {
+              timers: Array.isArray(timers) ? timers : [],
+              history: Array.isArray(history) ? history : [],
+            },
+          });
+        } catch (error) {
+          console.error("Error loading state from AsyncStorage:", error);
+        }
+      };
+    
+      loadState();
+    }, []);
 
   useEffect(() => {
     state.timers.forEach((timer) => {
