@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Modal, View, Text, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
 
 interface CustomModalProps {
   visible: boolean;
@@ -40,10 +40,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#333',
     marginBottom: 10,
   },
   message: {
     fontSize: 16,
+    color: '#333',
     textAlign: 'center',
     marginBottom: 20,
   },

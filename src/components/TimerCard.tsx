@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons'; // Ensure you have this installed
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Timer } from '../context/TimerContext';
 
 interface TimerCardProps {
@@ -8,7 +8,7 @@ interface TimerCardProps {
   onStart: () => void;
   onPause: () => void;
   onReset: () => void;
-  onDelete: () => void; // Function for delete button
+  onDelete: () => void;
 }
 
 const TimerCard: React.FC<TimerCardProps> = ({ timer, onStart, onPause, onReset, onDelete }) => {
@@ -17,22 +17,18 @@ const TimerCard: React.FC<TimerCardProps> = ({ timer, onStart, onPause, onReset,
 
   return (
     <View style={styles.card}>
-      {/* Delete Button */}
       <TouchableOpacity style={styles.deleteIcon} onPress={onDelete}>
-        <Icon name="trash-outline" size={20} color="#ff4d4d" />
+        <Icon name="trash-outline" size={20} />
       </TouchableOpacity>
 
-      {/* Timer Info */}
       <Text style={styles.name}>{timer.name}</Text>
       <Text style={styles.remainingTime}>{`Remaining Time: ${timer.remainingTime}s`}</Text>
       <Text style={styles.status}>{`Status: ${timer.status}`}</Text>
 
-      {/* Progress Bar */}
       <View style={styles.progressBarContainer}>
         <View style={[styles.progressBar, { width: `${progress}%` }]} />
       </View>
 
-      {/* Buttons */}
       <View style={styles.buttonContainer}>
         <Button title="Start" onPress={onStart} color="#4caf50" />
         <Button title="Pause" onPress={onPause} color="#ff9800" />
@@ -49,7 +45,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderColor: '#ccc',
-    backgroundColor: '#f9f9f9',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
@@ -64,6 +59,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 20,
+    color: '#3C75BE',
     fontWeight: 'bold',
     marginBottom: 8,
   },

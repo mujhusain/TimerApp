@@ -1,12 +1,15 @@
 import React from "react";
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-import { TimerProvider, useTimerContext } from "../context/TimerContext";
+import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { useTimerContext } from "../context/TimerContext";
 import { Colors } from "../utills/Constants";
 import { navigationRef } from "../utills/NavigationUtil";
 import BottomTab from "./BottomTab";
 import CustomModal from "../components/globale/CustomModal";
+import { useColorScheme } from "react-native";
 
 const MainNavigation = () => {
+  const colorScheme = useColorScheme();
+
   const {state: { completedTimerName }, dispatch} = useTimerContext();
   const MyTheme = {
     ...DefaultTheme,
@@ -22,7 +25,7 @@ const MainNavigation = () => {
 
   return (
     <>
-      <NavigationContainer ref={navigationRef} theme={MyTheme}>
+      <NavigationContainer ref={navigationRef} theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <BottomTab />
       </NavigationContainer>
       <CustomModal
