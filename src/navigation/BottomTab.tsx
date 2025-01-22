@@ -12,18 +12,18 @@ function BottomTab() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName = 'home';
+          let iconName = 'alarm-outline';
 
           if (route.name === 'Home') {
             iconName = focused ? 'timer' : 'timer-outline';
           } else if (route.name === 'History') {
             iconName = focused ? 'time' : 'time-outline'; 
+          } else if (route.name === 'Add Timer') {
+            iconName = focused ? 'add-circle' : 'add-circle-outline'; 
           }
 
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#4CAF50',
-        tabBarInactiveTintColor: '#9E9E9E',
         tabBarStyle: {
           borderTopWidth: 1,
           height: 60,
