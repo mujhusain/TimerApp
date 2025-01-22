@@ -51,15 +51,16 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TimerCard
-            timer={item}
-            onStart={() => dispatch({ type: "UPDATE_TIMER", payload: { ...item, status: "Running" } })}
-            onPause={() => dispatch({ type: "UPDATE_TIMER", payload: { ...item, status: "Paused" } })}
-            onReset={() =>
-              dispatch({
-                type: "UPDATE_TIMER",
-                payload: { ...item, status: "Paused", remainingTime: item.duration },
-              })
-            }
+          timer={item}
+          onStart={() => dispatch({ type: "UPDATE_TIMER", payload: { ...item, status: "Running" } })}
+          onPause={() => dispatch({ type: "UPDATE_TIMER", payload: { ...item, status: "Paused" } })}
+          onReset={() =>
+            dispatch({
+              type: "UPDATE_TIMER",
+              payload: { ...item, status: "Paused", remainingTime: item.duration },
+            })
+          }
+          onDelete={() => dispatch({ type: "DELETE_TIMER", payload: item.id })}
           />
         )}
         renderSectionHeader={({ section: { title } }) => (

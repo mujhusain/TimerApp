@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useTimerContext } from "../context/TimerContext";
+import HistoryCard from "../components/TimerHistoryCard";
 
 const HistoryScreen = () => {
   const { state } = useTimerContext();
@@ -12,10 +13,7 @@ const HistoryScreen = () => {
         data={state.history}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text>{`Completed At: ${item.completionTime}`}</Text>
-          </View>
+          <HistoryCard name={item.name} completionTime={item.completionTime} />
         )}
         ListEmptyComponent={<Text>No timers completed yet.</Text>}
       />
@@ -32,16 +30,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
-  },
-  card: {
-    padding: 16,
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: "bold",
   },
 });
 

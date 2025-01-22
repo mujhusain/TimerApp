@@ -17,6 +17,7 @@ const App = () => {
     <TimerProvider>
       <NavigationContainer ref={navigationRef} theme={MyTheme}>
         <BottomTab />
+        
       </NavigationContainer>
     </TimerProvider>
   );

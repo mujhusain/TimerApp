@@ -90,7 +90,6 @@ export const TimerProvider: React.FC<TimerProviderProps> = ({ children }) => {
   useEffect(() => {
     state.timers.forEach((timer) => {
       if (timer.status === "Running" && timer.remainingTime > 0 && !intervals.current[timer.id]) {
-        // Start a new interval for the running timer
         intervals.current[timer.id] = setInterval(() => {
           dispatch({
             type: "UPDATE_TIMER",
@@ -111,13 +110,11 @@ export const TimerProvider: React.FC<TimerProviderProps> = ({ children }) => {
           }
         }, 1000);
       } else if (timer.status !== "Running" && intervals.current[timer.id]) {
-        // Clear interval for paused or completed timer
         clearInterval(intervals.current[timer.id]);
         delete intervals.current[timer.id];
       }
     });
 
-    // Cleanup intervals when component unmounts
     return () => {
       Object.values(intervals.current).forEach(clearInterval);
       intervals.current = {};
