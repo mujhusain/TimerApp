@@ -1,18 +1,11 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-export const saveData = async (key: string, value: any) => {
-  try {
-    await AsyncStorage.setItem(key, JSON.stringify(value));
-  } catch (error) {
-    console.error('Error saving data', error);
-  }
-};
-
-export const getData = async (key: string) => {
-  try {
-    const value = await AsyncStorage.getItem(key);
-    return value ? JSON.parse(value) : null;
-  } catch (error) {
-    console.error('Error retrieving data', error);
-  }
+export const formatCompletionTime = (isoString: string): string => {
+  const date = new Date(isoString);
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  }).format(date);
 };

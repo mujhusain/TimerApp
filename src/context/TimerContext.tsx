@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useContext, useEffect, useRef, useState } from "react";
 import { Alert } from "react-native";
+import { formatCompletionTime } from "../utills/utills";
 
 export interface Timer {
   id: string;
@@ -95,7 +96,7 @@ interface TimerProviderProps {
 export const TimerProvider: React.FC<TimerProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(timerReducer, initialState);
   const intervals = useRef<{ [id: string]: NodeJS.Timeout }>({});
-let temp;
+
   useEffect(() => {
     state.timers.forEach((timer) => {
       if (timer.status === "Running" && timer.remainingTime > 0 && !intervals.current[timer.id]) {
@@ -126,7 +127,7 @@ let temp;
             delete intervals.current[timer.id];
             dispatch({
               type: "ADD_TO_HISTORY",
-              payload: { id: timer.id, name: timer.name, completionTime: new Date().toISOString() },
+              payload: { id: timer.id + new Date().toISOString(), name: timer.name, completionTime: formatCompletionTime(new Date().toISOString()) },
             });
           }
         }, 1000);
