@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   sectionHeader: {
-    backgroundColor: "#f5f5f5",
     padding: 10,
   },
   sectionTitle: {
