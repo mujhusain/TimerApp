@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useContext, useEffect, useRef } from "react";
+import { Alert } from "react-native";
 
 export interface Timer {
   id: string;
@@ -7,6 +8,7 @@ export interface Timer {
   remainingTime: number;
   status: "Running" | "Paused" | "Completed";
   category: string;
+  hasShownHalfwayAlert?: boolean;
 }
 
 export interface TimerState {
@@ -91,6 +93,16 @@ export const TimerProvider: React.FC<TimerProviderProps> = ({ children }) => {
     state.timers.forEach((timer) => {
       if (timer.status === "Running" && timer.remainingTime > 0 && !intervals.current[timer.id]) {
         intervals.current[timer.id] = setInterval(() => {
+
+           // Check if halfway alert needs to be shown
+           if (!timer.hasShownHalfwayAlert && timer.remainingTime === Math.ceil(timer.duration / 2)) {
+            Alert.alert('50% Time Remaining', `Timer "${timer.name}" is halfway done.`);
+            dispatch({
+              type: 'UPDATE_TIMER',
+              payload: { ...timer, hasShownHalfwayAlert: true },
+            });
+          }
+
           dispatch({
             type: "UPDATE_TIMER",
             payload: {
