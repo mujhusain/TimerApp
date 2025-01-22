@@ -1,4 +1,4 @@
-package com.imageapp
+package com.timerapp
 
 import android.app.Application
 import com.facebook.react.PackageList
