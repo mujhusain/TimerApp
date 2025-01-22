@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screen/HomeScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HistoryScreen from '../screen/HistoryScreen';
+import AddTimerScreen from '../screen/AddTimerScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,12 +22,10 @@ function BottomTab() {
 
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#4CAF50', // Active tab color
-        tabBarInactiveTintColor: '#9E9E9E', // Inactive tab color
+        tabBarActiveTintColor: '#4CAF50',
+        tabBarInactiveTintColor: '#9E9E9E',
         tabBarStyle: {
-          backgroundColor: '#FFFFFF',
           borderTopWidth: 1,
-          borderTopColor: '#E0E0E0',
           height: 60,
         },
         tabBarLabelStyle: {
@@ -38,6 +37,7 @@ function BottomTab() {
         },
       })}>
       <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Add Timer" component={AddTimerScreen} />
       <Tab.Screen name="History" component={HistoryScreen} />
     </Tab.Navigator>
   );
