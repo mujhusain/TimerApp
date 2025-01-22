@@ -13,7 +13,7 @@ import TimerCard from "../components/TimerCard";
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   const { state, dispatch } = useTimerContext();
   const [groupedTimers, setGroupedTimers] = useState<{ title: string; data: Timer[] }[]>([]);
-
+  
   useEffect(() => {
     const grouped = state.timers.reduce((acc: any, timer: Timer) => {
       acc[timer.category] = acc[timer.category] || [];
