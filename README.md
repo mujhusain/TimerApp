@@ -23,7 +23,7 @@ A React Native application to manage and interact with timers and history logs, 
 Before running the app, ensure you have the following installed:
 - **Node.js** (v18.x or later)
 - **npm** or **yarn**
-- **React Native CLI** (`npm install -g react-native-cli`)
+- **React Native CLI** (`npm install -g @react-native-community/cli`)
 - **Android Studio** (for Android emulator)
 - **Xcode** (for iOS development, macOS only)
 
