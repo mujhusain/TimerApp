@@ -18,7 +18,7 @@ const TimerCard: React.FC<TimerCardProps> = ({ timer, onStart, onPause, onReset,
   return (
     <View style={styles.card}>
       <TouchableOpacity style={styles.deleteIcon} onPress={onDelete}>
-        <Icon name="trash-outline" size={20} />
+        <Icon name="trash-outline" size={20} color="#f44336"  />
       </TouchableOpacity>
 
       <Text style={styles.name}>{timer.name}</Text>
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
   },
   deleteIcon: {
     position: 'absolute',
-    top: 8,
-    right: 8,
+    top: 15,
+    right: 10,
     zIndex: 10,
   },
   name: {
