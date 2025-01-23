@@ -9,14 +9,15 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { useTimerContext } from "../context/TimerContext";
+import { goBack } from "../utills/NavigationUtil";
 
-const AddTimerScreen = ({ navigation }: { navigation: any }) => {
+const AddTimerScreen = () => {
   const { dispatch } = useTimerContext();
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
   const [category, setCategory] = useState("Workout");
 
-  // Alternative for generating unique IDs
+  // generating unique IDs
   const generateUniqueId = () => {
     return `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
   };
@@ -37,7 +38,7 @@ const AddTimerScreen = ({ navigation }: { navigation: any }) => {
     };
 
     dispatch({ type: "ADD_TIMER", payload: newTimer });
-    navigation.goBack();
+    goBack();
   };
 
   return (

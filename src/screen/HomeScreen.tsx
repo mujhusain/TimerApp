@@ -7,10 +7,12 @@ import {
   Button,
   Alert,
 } from "react-native";
-import { useTimerContext, Timer } from "../context/TimerContext";
+import { useTimerContext } from "../context/TimerContext";
 import TimerCard from "../components/TimerCard";
+import { Timer } from "../context/types";
+import { navigate } from "../utills/NavigationUtil";
 
-const HomeScreen = ({ navigation }: { navigation: any }) => {
+const HomeScreen = () => {
   const { state, dispatch } = useTimerContext();
   const [groupedTimers, setGroupedTimers] = useState<{ title: string; data: Timer[] }[]>([]);
   
@@ -45,7 +47,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
 
   return (
     <View style={styles.container}>
-      <Button title="Add Timer" onPress={() => navigation.navigate("Add Timer")} />
+      <Button title="Add Timer" onPress={() => navigate("Add Timer")} />
       <SectionList
         sections={groupedTimers}
         keyExtractor={(item) => item.id}
