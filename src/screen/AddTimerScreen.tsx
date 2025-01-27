@@ -10,6 +10,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { useTimerContext } from "../context/TimerContext";
 import { goBack } from "../utills/NavigationUtil";
+import CustomSafeAreaView from "../components/globale/CustomSafeAreaView";
 
 const AddTimerScreen = () => {
   const { dispatch } = useTimerContext();
@@ -42,6 +43,7 @@ const AddTimerScreen = () => {
   };
 
   return (
+    <CustomSafeAreaView>
     <View style={styles.container}>
       <Text style={styles.label}>Timer Name</Text>
       <TextInput
@@ -73,6 +75,7 @@ const AddTimerScreen = () => {
 
       <Button title="Save Timer" onPress={handleSave} />
     </View>
+    </CustomSafeAreaView>
   );
 };
 

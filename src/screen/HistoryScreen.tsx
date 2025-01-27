@@ -2,11 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useTimerContext } from "../context/TimerContext";
 import HistoryCard from "../components/TimerHistoryCard";
+import CustomSafeAreaView from "../components/globale/CustomSafeAreaView";
 
 const HistoryScreen = () => {
   const { state } = useTimerContext();
 
   return (
+    <CustomSafeAreaView>
     <View style={styles.container}>
       <Text style={styles.header}>Completed Timers</Text>
       <FlatList
@@ -18,6 +20,7 @@ const HistoryScreen = () => {
         ListEmptyComponent={<Text>No timers completed yet.</Text>}
       />
     </View>
+    </CustomSafeAreaView>
   );
 };
 

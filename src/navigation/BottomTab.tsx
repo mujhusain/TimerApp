@@ -1,10 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useTheme } from '@react-navigation/native'; // Import the theme hook
+import { useTheme } from '@react-navigation/native';
 import HomeScreen from '../screen/HomeScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HistoryScreen from '../screen/HistoryScreen';
 import AddTimerScreen from '../screen/AddTimerScreen';
+import { Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,9 +30,9 @@ function BottomTab() {
         },
         tabBarStyle: {
           borderTopWidth: 1,
-          height: 60,
           backgroundColor: colors.card,
           borderTopColor: colors.border,
+          height: Platform.OS === 'ios' ? 75 : 60,
         },
         tabBarLabelStyle: {
           fontSize: 12,

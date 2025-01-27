@@ -6,6 +6,7 @@ import { navigationRef } from "../utills/NavigationUtil";
 import BottomTab from "./BottomTab";
 import CustomModal from "../components/globale/CustomModal";
 import { useColorScheme } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const MainNavigation = () => {
   const colorScheme = useColorScheme();
